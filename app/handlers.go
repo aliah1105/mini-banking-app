@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
+	"github.com/gorilla/mux"
 	"net/http"
 )
 
@@ -29,4 +30,13 @@ func getAllCustomers(writer http.ResponseWriter, request *http.Request) {
 		writer.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(writer).Encode(customers)
 	}
+}
+
+func getCustomer(writer http.ResponseWriter, request *http.Request) {
+	vars := mux.Vars(request)
+	fmt.Fprint(writer, vars["customer_id"])
+}
+
+func createCustomer(writer http.ResponseWriter, request *http.Request) {
+	fmt.Fprint(writer, "something received")
 }
